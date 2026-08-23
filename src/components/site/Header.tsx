@@ -140,7 +140,7 @@ export function Header() {
 
           <form
             onSubmit={submitSearch}
-            className="ml-auto hidden items-center border border-border lg:flex"
+            className="ml-auto hidden items-center overflow-hidden rounded-[15px] border border-border lg:flex"
           >
             <input
               value={term}
