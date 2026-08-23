@@ -184,7 +184,7 @@ export function Header() {
           <div className="absolute inset-0 bg-black/50" onClick={() => setMobileOpen(false)} />
           <div className="absolute left-0 top-0 h-full w-[280px] bg-card p-4">
             <div className="mb-4 flex items-center justify-between">
-              <img src={site.logo} alt={site.name} className="h-8 w-auto" />
+              <img src={site.logoDark} alt={site.name} className="h-9 w-auto object-contain" />
               <button type="button" aria-label="Fechar menu" onClick={() => setMobileOpen(false)}>
                 <X className="size-4" />
               </button>
