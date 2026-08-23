@@ -56,10 +56,10 @@ export const advantageTexts: Record<string, string> = {
 };
 
 export const aboutText =
-  "Flex, uma marca de beleza e cosméticos, tem como missão redefinir o bem-estar feminino de maneira única. Buscando transcender tendências passageiras, a Flex é uma expressão de autocuidado atemporal, onde cada produto é meticulosamente produzido para proporcionar uma experiência que reflete confiança e bem-estar.";
+  "Rebka é uma marca de skin care com a missão de conectar cuidado, ciência e autoestima. Mais que tendências passageiras, a Rebka é uma expressão de autocuidado atemporal: cada produto é desenvolvido para proporcionar uma experiência que reflete confiança e bem-estar.";
 
 export const footerAbout =
-  "Este padrão visual é o resultado de mais de 5 anos de trabalho e mais de 1000 lojas atendidas com o Tema Flex. Queremos ver sua loja crescer com um layout lindo e funcional, onde você tem 100% de autonomia para deixar ele do seu jeito.";
+  "A Rebka nasceu da ideia de que skin care conecta pessoas: fórmulas limpas, testadas e pensadas para todos os tipos de pele. Mais de 1000 clientes já transformaram a rotina de cuidados com a nossa curadoria.";
 
 export const footerCategories = [
   { label: "Perfume", slug: "perfumes" },
