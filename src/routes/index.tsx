@@ -53,9 +53,9 @@ function HeroCarousel() {
   return (
     <section className="relative overflow-hidden">
       {slides.map((slide, i) => (
-        <Link
+        <a
           key={slide.id}
-          to={slide.link ?? "/"}
+          href={slide.link ?? "/"}
           className={i === index ? "block" : "hidden"}
         >
           <picture>
@@ -68,7 +68,7 @@ function HeroCarousel() {
               className="w-full object-cover"
             />
           </picture>
-        </Link>
+        </a>
       ))}
       <div className="absolute bottom-4 left-0 flex w-full items-center justify-center gap-[6px]">
         {slides.map((s, i) => (
@@ -204,13 +204,13 @@ function PromoBanners() {
     <section className="py-12">
       <div className="flex-container grid gap-4 lg:grid-cols-3">
         {promos.map((b) => (
-          <Link key={b.id} to={b.link ?? "/"} className="block overflow-hidden">
+          <a key={b.id} href={b.link ?? "/"} className="block overflow-hidden">
             <img
               src={b.image_url}
               alt={b.title ?? ""}
               className="w-full object-cover transition-transform duration-500 hover:scale-105"
             />
-          </Link>
+          </a>
         ))}
       </div>
     </section>
@@ -223,7 +223,7 @@ function PerfumeBanner() {
   if (!banner) return null;
   return (
     <section>
-      <Link to={banner.link ?? "/"} className="block">
+      <a href={banner.link ?? "/"} className="block">
         <picture>
           {banner.mobile_image_url ? (
             <source media="(max-width: 767px)" srcSet={banner.mobile_image_url} />
@@ -234,7 +234,7 @@ function PerfumeBanner() {
             className="w-full object-cover"
           />
         </picture>
-      </Link>
+      </a>
     </section>
   );
 }
