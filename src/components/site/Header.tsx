@@ -189,7 +189,7 @@ export function Header() {
                 <X className="size-4" />
               </button>
             </div>
-            <form onSubmit={submitSearch} className="mb-4 flex items-center border border-border">
+            <form onSubmit={submitSearch} className="mb-4 flex items-center overflow-hidden rounded-[15px] border border-border">
               <input
                 value={term}
                 onChange={(e) => setTerm(e.target.value)}
