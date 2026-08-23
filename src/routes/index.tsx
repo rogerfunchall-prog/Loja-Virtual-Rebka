@@ -37,54 +37,16 @@ export const Route = createFileRoute("/")({
   component: Home,
 });
 
-function HeroCarousel() {
-  const { data: banners = [] } = useQuery(bannersQuery);
-  const slides = banners.filter((b) => b.kind === "hero");
-  const [index, setIndex] = useState(0);
-
-  useEffect(() => {
-    if (slides.length < 2) return;
-    const id = setInterval(() => setIndex((i) => (i + 1) % slides.length), 5000);
-    return () => clearInterval(id);
-  }, [slides.length]);
-
-  if (slides.length === 0) return null;
-
+function HeroBanner() {
   return (
-    <section className="relative overflow-hidden">
-      {slides.map((slide, i) => (
-        <a
-          key={slide.id}
-          href={slide.link ?? "/"}
-          className={i === index ? "block" : "hidden"}
-        >
-          <picture>
-            {slide.mobile_image_url ? (
-              <source media="(max-width: 767px)" srcSet={slide.mobile_image_url} />
-            ) : null}
-            <img
-              src={slide.image_url}
-              alt={slide.title ?? "Destaque"}
-              className="w-full object-cover"
-            />
-          </picture>
-        </a>
-      ))}
-      <div className="absolute bottom-4 left-0 flex w-full items-center justify-center gap-[6px]">
-        {slides.map((s, i) => (
-          <button
-            key={s.id}
-            type="button"
-            aria-label={`Slide ${i + 1}`}
-            onClick={() => setIndex(i)}
-            className={
-              i === index
-                ? "h-[7px] w-5 rounded-full bg-brand"
-                : "size-[7px] rounded-full bg-white/70"
-            }
-          />
-        ))}
-      </div>
+    <section className="overflow-hidden">
+      <Link to="/produtos" className="block">
+        <img
+          src={heroBanner.url}
+          alt="Rebka — Skin Care That Connects"
+          className="w-full object-cover"
+        />
+      </Link>
     </section>
   );
 }
