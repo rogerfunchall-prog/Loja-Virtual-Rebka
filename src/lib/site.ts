@@ -1,13 +1,20 @@
+import logoDarkAsset from "@/assets/logo-dark.png.asset.json";
+import logoLightAsset from "@/assets/logo-light.png.asset.json";
+import logoPinkAsset from "@/assets/logo-pink.png.asset.json";
+
 export const CDN =
   "https://dcdn-us.mitiendanube.com/stores/006/384/221";
 
 export const site = {
   name: "Rebka",
-  tagline: "Tema premium para lojas de beleza e cosméticos",
-  logo: `${CDN}/themes/common/logo-291466851-1750445234-8dc5d4a446cf3d5ad5fd68e15a2924131750445234-480-0.webp`,
+  tagline: "Skin Care That Connects",
+  logo: logoDarkAsset.url,
+  logoDark: logoDarkAsset.url,
+  logoLight: logoLightAsset.url,
+  logoPink: logoPinkAsset.url,
   phone: "(11) 99673-9701",
   whatsapp: "5511996739701",
-  email: "cosmeticos@temaflex.com.br",
+  email: "contato@rebka.com.br",
   city: "São Paulo/SP",
   hours: "Seg. a sex. das 9h às 18h",
   instagram: "https://instagram.com/nuvemshop",
