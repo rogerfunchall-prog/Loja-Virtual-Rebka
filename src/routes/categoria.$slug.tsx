@@ -6,9 +6,9 @@ import { ProductCard } from "@/components/site/ProductCard";
 export const Route = createFileRoute("/categoria/$slug")({
   head: () => ({
     meta: [
-      { title: "Categoria | Flex Cosmetics" },
-      { name: "description", content: "Produtos selecionados de beleza e cosméticos por categoria na Flex Cosmetics." },
-      { property: "og:title", content: "Categoria | Flex Cosmetics" },
+      { title: "Categoria | Rebka" },
+      { name: "description", content: "Produtos selecionados de beleza e cosméticos por categoria na Rebka." },
+      { property: "og:title", content: "Categoria | Rebka" },
       { property: "og:description", content: "Produtos selecionados de beleza e cosméticos por categoria." },
     ],
   }),

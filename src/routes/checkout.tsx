@@ -8,10 +8,10 @@ import { brl, pixPrice } from "@/lib/format";
 export const Route = createFileRoute("/checkout")({
   head: () => ({
     meta: [
-      { title: "Finalizar compra | Flex Cosmetics" },
+      { title: "Finalizar compra | Rebka" },
       { name: "description", content: "Informe seus dados de entrega e escolha a forma de pagamento para concluir seu pedido." },
-      { property: "og:title", content: "Finalizar compra | Flex Cosmetics" },
-      { property: "og:description", content: "Informe seus dados e conclua seu pedido na Flex Cosmetics." },
+      { property: "og:title", content: "Finalizar compra | Rebka" },
+      { property: "og:description", content: "Informe seus dados e conclua seu pedido na Rebka." },
     ],
   }),
   component: Page,

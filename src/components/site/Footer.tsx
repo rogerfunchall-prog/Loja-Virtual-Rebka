@@ -116,7 +116,7 @@ export function Footer() {
         <div className="flex-container grid gap-8 lg:grid-cols-4">
           <div>
             <h3 className="mb-3 text-[12px] font-semibold uppercase tracking-wider text-brand">
-              Porque escolher o Tema Flex?
+              Porque escolher a Rebka?
             </h3>
             <p className="text-[12px] leading-[1.7] text-ink-soft">{footerAbout}</p>
           </div>

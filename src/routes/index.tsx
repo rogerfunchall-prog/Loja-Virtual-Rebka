@@ -17,7 +17,7 @@ import { aboutText, advantageTexts, advantages, promoRibbon } from "@/lib/site";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Flex Cosmetics | Perfumes, Skin Care e Maquiagem" },
+      { title: "Rebka | Perfumes, Skin Care e Maquiagem" },
       {
         name: "description",
         content:
@@ -25,7 +25,7 @@ export const Route = createFileRoute("/")({
       },
       {
         property: "og:title",
-        content: "Flex Cosmetics | Perfumes, Skin Care e Maquiagem",
+        content: "Rebka | Perfumes, Skin Care e Maquiagem",
       },
       {
         property: "og:description",
@@ -171,7 +171,7 @@ function AdvantageCards() {
   return (
     <section className="bg-surface py-12">
       <div className="flex-container">
-        <SectionHeading title="Por que escolher a Flex?" />
+        <SectionHeading title="Por que escolher a Rebka?" />
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {cards.map((c) => (
             <article key={c.id} className="bg-card">
@@ -247,7 +247,7 @@ function AboutSection() {
       <div className="flex-container grid items-center gap-10 lg:grid-cols-2">
         <div>
           <h2 className="mb-4 font-heading text-[24px] leading-[1.3] uppercase tracking-[0.1em] text-ink">
-            {about?.title ?? "Seja bem-vinda ao nosso Universo Flex"}
+            {about?.title ?? "Seja bem-vinda ao universo Rebka"}
           </h2>
           <p className="mb-6 text-[13px] leading-[1.9] text-ink-soft">{aboutText}</p>
           <Link

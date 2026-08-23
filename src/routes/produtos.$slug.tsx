@@ -11,9 +11,9 @@ import { SectionHeading } from "@/components/site/SectionHeading";
 export const Route = createFileRoute("/produtos/$slug")({
   head: () => ({
     meta: [
-      { title: "Produto | Flex Cosmetics" },
-      { name: "description", content: "Detalhes do produto, preço no Pix e parcelamento sem juros na Flex Cosmetics." },
-      { property: "og:title", content: "Produto | Flex Cosmetics" },
+      { title: "Produto | Rebka" },
+      { name: "description", content: "Detalhes do produto, preço no Pix e parcelamento sem juros na Rebka." },
+      { property: "og:title", content: "Produto | Rebka" },
       { property: "og:description", content: "Detalhes do produto, preço no Pix e parcelamento sem juros." },
     ],
   }),

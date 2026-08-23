@@ -2,7 +2,7 @@ export const CDN =
   "https://dcdn-us.mitiendanube.com/stores/006/384/221";
 
 export const site = {
-  name: "Flex Cosmetics",
+  name: "Rebka",
   tagline: "Tema premium para lojas de beleza e cosméticos",
   logo: `${CDN}/themes/common/logo-291466851-1750445234-8dc5d4a446cf3d5ad5fd68e15a2924131750445234-480-0.webp`,
   phone: "(11) 99673-9701",

@@ -3,9 +3,9 @@ import { createFileRoute } from "@tanstack/react-router";
 export const Route = createFileRoute("/politica-de-privacidade")({
   head: () => ({
     meta: [
-      { title: "Política de Privacidade | Flex Cosmetics" },
+      { title: "Política de Privacidade | Rebka" },
       { name: "description", content: "Como tratamos os seus dados." },
-      { property: "og:title", content: "Política de Privacidade | Flex Cosmetics" },
+      { property: "og:title", content: "Política de Privacidade | Rebka" },
       { property: "og:description", content: "Como tratamos os seus dados." },
     ],
   }),

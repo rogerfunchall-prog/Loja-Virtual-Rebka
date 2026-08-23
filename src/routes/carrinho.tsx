@@ -6,9 +6,9 @@ import { brl } from "@/lib/format";
 export const Route = createFileRoute("/carrinho")({
   head: () => ({
     meta: [
-      { title: "Meu carrinho | Flex Cosmetics" },
-      { name: "description", content: "Revise os itens do seu carrinho e finalize sua compra na Flex Cosmetics." },
-      { property: "og:title", content: "Meu carrinho | Flex Cosmetics" },
+      { title: "Meu carrinho | Rebka" },
+      { name: "description", content: "Revise os itens do seu carrinho e finalize sua compra na Rebka." },
+      { property: "og:title", content: "Meu carrinho | Rebka" },
       { property: "og:description", content: "Revise os itens do seu carrinho e finalize sua compra." },
     ],
   }),
