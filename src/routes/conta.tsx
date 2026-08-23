@@ -2,7 +2,6 @@ import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
-import { lovable } from "@/integrations/lovable/index";
 import { useAuth } from "@/lib/auth";
 
 export const Route = createFileRoute("/conta")({
@@ -45,18 +44,6 @@ function Page() {
       return;
     }
     toast.success(mode === "login" ? "Bem-vinda de volta!" : "Cadastro realizado!");
-  }
-
-  async function google() {
-    const result = await lovable.auth.signInWithOAuth("google", {
-      redirect_uri: window.location.origin,
-    });
-    if (result.error) {
-      toast.error("Não foi possível entrar com o Google.");
-      return;
-    }
-    if (result.redirected) return;
-    toast.success("Bem-vinda!");
   }
 
   if (loading) {
@@ -117,13 +104,6 @@ function Page() {
           className="mb-3 w-full bg-brand py-3 text-[11px] font-semibold uppercase tracking-wider text-brand-foreground hover:bg-brand-dark disabled:opacity-60"
         >
           {mode === "login" ? "Entrar" : "Cadastrar"}
-        </button>
-        <button
-          type="button"
-          onClick={google}
-          className="mb-4 w-full border border-border py-3 text-[11px] font-semibold uppercase tracking-wider hover:border-brand hover:text-brand"
-        >
-          Entrar com o Google
         </button>
         <button
           type="button"

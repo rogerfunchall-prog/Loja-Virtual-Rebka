@@ -13,11 +13,14 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as BuscaRouteImport } from './routes/busca'
 import { Route as CarrinhoRouteImport } from './routes/carrinho'
 import { Route as CheckoutRouteImport } from './routes/checkout'
+import { Route as ContaRouteImport } from './routes/conta'
 import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as PagamentoEFreteRouteImport } from './routes/pagamento-e-frete'
 import { Route as PoliticaDePrivacidadeRouteImport } from './routes/politica-de-privacidade'
 import { Route as QuemSomosRouteImport } from './routes/quem-somos'
 import { Route as TrocasEDevolucoesRouteImport } from './routes/trocas-e-devolucoes'
+import { Route as BlogIndexRouteImport } from './routes/blog.index'
+import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as CategoriaSlugRouteImport } from './routes/categoria.$slug'
 import { Route as ProdutosIndexRouteImport } from './routes/produtos.index'
 import { Route as ProdutosSlugRouteImport } from './routes/produtos.$slug'
@@ -40,6 +43,11 @@ const CarrinhoRoute = CarrinhoRouteImport.update({
 const CheckoutRoute = CheckoutRouteImport.update({
   id: '/checkout',
   path: '/checkout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContaRoute = ContaRouteImport.update({
+  id: '/conta',
+  path: '/conta',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContatoRoute = ContatoRouteImport.update({
@@ -67,6 +75,16 @@ const TrocasEDevolucoesRoute = TrocasEDevolucoesRouteImport.update({
   path: '/trocas-e-devolucoes',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogIndexRoute = BlogIndexRouteImport.update({
+  id: '/blog/',
+  path: '/blog/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/blog/$slug',
+  path: '/blog/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CategoriaSlugRoute = CategoriaSlugRouteImport.update({
   id: '/categoria/$slug',
   path: '/categoria/$slug',
@@ -88,13 +106,16 @@ export interface FileRoutesByFullPath {
   '/busca': typeof BuscaRoute
   '/carrinho': typeof CarrinhoRoute
   '/checkout': typeof CheckoutRoute
+  '/conta': typeof ContaRoute
   '/contato': typeof ContatoRoute
   '/pagamento-e-frete': typeof PagamentoEFreteRoute
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/quem-somos': typeof QuemSomosRoute
   '/trocas-e-devolucoes': typeof TrocasEDevolucoesRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/categoria/$slug': typeof CategoriaSlugRoute
   '/produtos/$slug': typeof ProdutosSlugRoute
+  '/blog/': typeof BlogIndexRoute
   '/produtos/': typeof ProdutosIndexRoute
 }
 export interface FileRoutesByTo {
@@ -102,13 +123,16 @@ export interface FileRoutesByTo {
   '/busca': typeof BuscaRoute
   '/carrinho': typeof CarrinhoRoute
   '/checkout': typeof CheckoutRoute
+  '/conta': typeof ContaRoute
   '/contato': typeof ContatoRoute
   '/pagamento-e-frete': typeof PagamentoEFreteRoute
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/quem-somos': typeof QuemSomosRoute
   '/trocas-e-devolucoes': typeof TrocasEDevolucoesRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/categoria/$slug': typeof CategoriaSlugRoute
   '/produtos/$slug': typeof ProdutosSlugRoute
+  '/blog': typeof BlogIndexRoute
   '/produtos': typeof ProdutosIndexRoute
 }
 export interface FileRoutesById {
@@ -117,13 +141,16 @@ export interface FileRoutesById {
   '/busca': typeof BuscaRoute
   '/carrinho': typeof CarrinhoRoute
   '/checkout': typeof CheckoutRoute
+  '/conta': typeof ContaRoute
   '/contato': typeof ContatoRoute
   '/pagamento-e-frete': typeof PagamentoEFreteRoute
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/quem-somos': typeof QuemSomosRoute
   '/trocas-e-devolucoes': typeof TrocasEDevolucoesRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/categoria/$slug': typeof CategoriaSlugRoute
   '/produtos/$slug': typeof ProdutosSlugRoute
+  '/blog/': typeof BlogIndexRoute
   '/produtos/': typeof ProdutosIndexRoute
 }
 export interface FileRouteTypes {
@@ -133,13 +160,16 @@ export interface FileRouteTypes {
     | '/busca'
     | '/carrinho'
     | '/checkout'
+    | '/conta'
     | '/contato'
     | '/pagamento-e-frete'
     | '/politica-de-privacidade'
     | '/quem-somos'
     | '/trocas-e-devolucoes'
+    | '/blog/$slug'
     | '/categoria/$slug'
     | '/produtos/$slug'
+    | '/blog/'
     | '/produtos/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -147,13 +177,16 @@ export interface FileRouteTypes {
     | '/busca'
     | '/carrinho'
     | '/checkout'
+    | '/conta'
     | '/contato'
     | '/pagamento-e-frete'
     | '/politica-de-privacidade'
     | '/quem-somos'
     | '/trocas-e-devolucoes'
+    | '/blog/$slug'
     | '/categoria/$slug'
     | '/produtos/$slug'
+    | '/blog'
     | '/produtos'
   id:
     | '__root__'
@@ -161,13 +194,16 @@ export interface FileRouteTypes {
     | '/busca'
     | '/carrinho'
     | '/checkout'
+    | '/conta'
     | '/contato'
     | '/pagamento-e-frete'
     | '/politica-de-privacidade'
     | '/quem-somos'
     | '/trocas-e-devolucoes'
+    | '/blog/$slug'
     | '/categoria/$slug'
     | '/produtos/$slug'
+    | '/blog/'
     | '/produtos/'
   fileRoutesById: FileRoutesById
 }
@@ -176,13 +212,16 @@ export interface RootRouteChildren {
   BuscaRoute: typeof BuscaRoute
   CarrinhoRoute: typeof CarrinhoRoute
   CheckoutRoute: typeof CheckoutRoute
+  ContaRoute: typeof ContaRoute
   ContatoRoute: typeof ContatoRoute
   PagamentoEFreteRoute: typeof PagamentoEFreteRoute
   PoliticaDePrivacidadeRoute: typeof PoliticaDePrivacidadeRoute
   QuemSomosRoute: typeof QuemSomosRoute
   TrocasEDevolucoesRoute: typeof TrocasEDevolucoesRoute
+  BlogSlugRoute: typeof BlogSlugRoute
   CategoriaSlugRoute: typeof CategoriaSlugRoute
   ProdutosSlugRoute: typeof ProdutosSlugRoute
+  BlogIndexRoute: typeof BlogIndexRoute
   ProdutosIndexRoute: typeof ProdutosIndexRoute
 }
 
@@ -214,6 +253,13 @@ declare module '@tanstack/react-router' {
       path: '/checkout'
       fullPath: '/checkout'
       preLoaderRoute: typeof CheckoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/conta': {
+      id: '/conta'
+      path: '/conta'
+      fullPath: '/conta'
+      preLoaderRoute: typeof ContaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contato': {
@@ -251,6 +297,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TrocasEDevolucoesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog/': {
+      id: '/blog/'
+      path: '/blog'
+      fullPath: '/blog/'
+      preLoaderRoute: typeof BlogIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/$slug': {
+      id: '/blog/$slug'
+      path: '/blog/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/categoria/$slug': {
       id: '/categoria/$slug'
       path: '/categoria/$slug'
@@ -280,13 +340,16 @@ const rootRouteChildren: RootRouteChildren = {
   BuscaRoute: BuscaRoute,
   CarrinhoRoute: CarrinhoRoute,
   CheckoutRoute: CheckoutRoute,
+  ContaRoute: ContaRoute,
   ContatoRoute: ContatoRoute,
   PagamentoEFreteRoute: PagamentoEFreteRoute,
   PoliticaDePrivacidadeRoute: PoliticaDePrivacidadeRoute,
   QuemSomosRoute: QuemSomosRoute,
   TrocasEDevolucoesRoute: TrocasEDevolucoesRoute,
+  BlogSlugRoute: BlogSlugRoute,
   CategoriaSlugRoute: CategoriaSlugRoute,
   ProdutosSlugRoute: ProdutosSlugRoute,
+  BlogIndexRoute: BlogIndexRoute,
   ProdutosIndexRoute: ProdutosIndexRoute,
 }
 export const routeTree = rootRouteImport
