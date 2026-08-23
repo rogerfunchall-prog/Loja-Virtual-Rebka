@@ -87,9 +87,9 @@ export function Footer() {
       <div className="bg-brand py-6">
         <div className="flex-container flex flex-col items-center justify-between gap-4 lg:flex-row">
           <img
-            src={site.logo}
+            src={site.logoLight}
             alt={site.name}
-            className="h-[34px] w-auto brightness-0 invert"
+            className="h-[42px] w-auto object-contain"
           />
           <div className="flex items-center gap-4 text-brand-foreground">
             <a href={site.instagram} target="_blank" rel="noreferrer" aria-label="Instagram">
