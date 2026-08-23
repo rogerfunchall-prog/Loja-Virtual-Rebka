@@ -1,0 +1,1 @@
+UPDATE public.banners SET title = 'Sérums e Cremes', image_url = '/__l5e/assets-v1/3d63f1e3-445e-4430-af10-22fa58871e62/banner-seruns-cremes.png', mobile_image_url = NULL, link = '/categoria/skin-care' WHERE kind = 'perfumes';
