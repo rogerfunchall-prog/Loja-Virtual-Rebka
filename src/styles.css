@@ -115,6 +115,20 @@
     border-color: var(--color-border);
   }
 
+  /* Botões, campos e links com aparência de botão: 15px nos 4 cantos */
+  button,
+  [type="button"],
+  [type="submit"],
+  [type="reset"],
+  select,
+  textarea,
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+  a[class*="bg-brand"],
+  a[class*="bg-ink"],
+  a[class*="border-input"] {
+    border-radius: 15px;
+  }
+
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
