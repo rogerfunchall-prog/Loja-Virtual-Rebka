@@ -6,10 +6,10 @@ import { ProductCard } from "@/components/site/ProductCard";
 export const Route = createFileRoute("/produtos/")({
   head: () => ({
     meta: [
-      { title: "Todos os produtos | Flex Cosmetics" },
-      { name: "description", content: "Veja todos os perfumes, skin care, maquiagem e cuidados com o cabelo da Flex Cosmetics." },
-      { property: "og:title", content: "Todos os produtos | Flex Cosmetics" },
-      { property: "og:description", content: "Catálogo completo de beleza e cosméticos da Flex." },
+      { title: "Todos os produtos | Rebka" },
+      { name: "description", content: "Veja todos os perfumes, skin care, maquiagem e cuidados com o cabelo da Rebka." },
+      { property: "og:title", content: "Todos os produtos | Rebka" },
+      { property: "og:description", content: "Catálogo completo de beleza e cosméticos da Rebka." },
     ],
   }),
   component: Page,

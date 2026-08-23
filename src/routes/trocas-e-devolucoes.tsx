@@ -3,9 +3,9 @@ import { createFileRoute } from "@tanstack/react-router";
 export const Route = createFileRoute("/trocas-e-devolucoes")({
   head: () => ({
     meta: [
-      { title: "Trocas e Devoluções | Flex Cosmetics" },
+      { title: "Trocas e Devoluções | Rebka" },
       { name: "description", content: "Como trocar ou devolver seu pedido." },
-      { property: "og:title", content: "Trocas e Devoluções | Flex Cosmetics" },
+      { property: "og:title", content: "Trocas e Devoluções | Rebka" },
       { property: "og:description", content: "Como trocar ou devolver seu pedido." },
     ],
   }),

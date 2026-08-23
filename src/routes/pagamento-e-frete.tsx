@@ -3,9 +3,9 @@ import { createFileRoute } from "@tanstack/react-router";
 export const Route = createFileRoute("/pagamento-e-frete")({
   head: () => ({
     meta: [
-      { title: "Pagamento e Frete | Flex Cosmetics" },
+      { title: "Pagamento e Frete | Rebka" },
       { name: "description", content: "Formas de pagamento e prazos de entrega." },
-      { property: "og:title", content: "Pagamento e Frete | Flex Cosmetics" },
+      { property: "og:title", content: "Pagamento e Frete | Rebka" },
       { property: "og:description", content: "Formas de pagamento e prazos de entrega." },
     ],
   }),

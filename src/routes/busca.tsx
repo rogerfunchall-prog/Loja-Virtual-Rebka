@@ -9,9 +9,9 @@ export const Route = createFileRoute("/busca")({
   }),
   head: () => ({
     meta: [
-      { title: "Busca | Flex Cosmetics" },
-      { name: "description", content: "Busque perfumes, skin care, maquiagem e mais na Flex Cosmetics." },
-      { property: "og:title", content: "Busca | Flex Cosmetics" },
+      { title: "Busca | Rebka" },
+      { name: "description", content: "Busque perfumes, skin care, maquiagem e mais na Rebka." },
+      { property: "og:title", content: "Busca | Rebka" },
       { property: "og:description", content: "Busque perfumes, skin care, maquiagem e mais." },
     ],
   }),

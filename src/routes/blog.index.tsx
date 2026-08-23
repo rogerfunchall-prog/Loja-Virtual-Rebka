@@ -5,10 +5,10 @@ import { postsQuery } from "@/lib/catalog";
 export const Route = createFileRoute("/blog/")({
   head: () => ({
     meta: [
-      { title: "Blog | Flex Cosmetics" },
-      { name: "description", content: "Dicas de beleza, skin care, maquiagem e cuidados com o cabelo no blog da Flex Cosmetics." },
-      { property: "og:title", content: "Blog | Flex Cosmetics" },
-      { property: "og:description", content: "Dicas de beleza, skin care e maquiagem da Flex Cosmetics." },
+      { title: "Blog | Rebka" },
+      { name: "description", content: "Dicas de beleza, skin care, maquiagem e cuidados com o cabelo no blog da Rebka." },
+      { property: "og:title", content: "Blog | Rebka" },
+      { property: "og:description", content: "Dicas de beleza, skin care e maquiagem da Rebka." },
     ],
   }),
   component: Page,

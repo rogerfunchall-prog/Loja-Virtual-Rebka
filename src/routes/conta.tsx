@@ -7,10 +7,10 @@ import { useAuth } from "@/lib/auth";
 export const Route = createFileRoute("/conta")({
   head: () => ({
     meta: [
-      { title: "Minha conta | Flex Cosmetics" },
-      { name: "description", content: "Acesse sua conta para acompanhar pedidos e agilizar suas compras na Flex Cosmetics." },
-      { property: "og:title", content: "Minha conta | Flex Cosmetics" },
-      { property: "og:description", content: "Acesse sua conta na Flex Cosmetics." },
+      { title: "Minha conta | Rebka" },
+      { name: "description", content: "Acesse sua conta para acompanhar pedidos e agilizar suas compras na Rebka." },
+      { property: "og:title", content: "Minha conta | Rebka" },
+      { property: "og:description", content: "Acesse sua conta na Rebka." },
     ],
   }),
   component: Page,

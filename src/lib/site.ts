@@ -1,13 +1,20 @@
+import logoDarkAsset from "@/assets/logo-dark.png.asset.json";
+import logoLightAsset from "@/assets/logo-light.png.asset.json";
+import logoPinkAsset from "@/assets/logo-pink.png.asset.json";
+
 export const CDN =
   "https://dcdn-us.mitiendanube.com/stores/006/384/221";
 
 export const site = {
-  name: "Flex Cosmetics",
-  tagline: "Tema premium para lojas de beleza e cosméticos",
-  logo: `${CDN}/themes/common/logo-291466851-1750445234-8dc5d4a446cf3d5ad5fd68e15a2924131750445234-480-0.webp`,
+  name: "Rebka",
+  tagline: "Skin Care That Connects",
+  logo: logoDarkAsset.url,
+  logoDark: logoDarkAsset.url,
+  logoLight: logoLightAsset.url,
+  logoPink: logoPinkAsset.url,
   phone: "(11) 99673-9701",
   whatsapp: "5511996739701",
-  email: "cosmeticos@temaflex.com.br",
+  email: "contato@rebka.com.br",
   city: "São Paulo/SP",
   hours: "Seg. a sex. das 9h às 18h",
   instagram: "https://instagram.com/nuvemshop",
@@ -49,10 +56,10 @@ export const advantageTexts: Record<string, string> = {
 };
 
 export const aboutText =
-  "Flex, uma marca de beleza e cosméticos, tem como missão redefinir o bem-estar feminino de maneira única. Buscando transcender tendências passageiras, a Flex é uma expressão de autocuidado atemporal, onde cada produto é meticulosamente produzido para proporcionar uma experiência que reflete confiança e bem-estar.";
+  "Rebka é uma marca de skin care com a missão de conectar cuidado, ciência e autoestima. Mais que tendências passageiras, a Rebka é uma expressão de autocuidado atemporal: cada produto é desenvolvido para proporcionar uma experiência que reflete confiança e bem-estar.";
 
 export const footerAbout =
-  "Este padrão visual é o resultado de mais de 5 anos de trabalho e mais de 1000 lojas atendidas com o Tema Flex. Queremos ver sua loja crescer com um layout lindo e funcional, onde você tem 100% de autonomia para deixar ele do seu jeito.";
+  "A Rebka nasceu da ideia de que skin care conecta pessoas: fórmulas limpas, testadas e pensadas para todos os tipos de pele. Mais de 1000 clientes já transformaram a rotina de cuidados com a nossa curadoria.";
 
 export const footerCategories = [
   { label: "Perfume", slug: "perfumes" },

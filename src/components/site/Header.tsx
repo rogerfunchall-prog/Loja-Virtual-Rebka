@@ -119,7 +119,7 @@ export function Header() {
 
           <Link to="/" className="shrink-0">
             <img
-              src={site.logo}
+              src={site.logoDark}
               alt={site.name}
               className="h-[38px] w-auto object-contain"
             />
@@ -140,7 +140,7 @@ export function Header() {
 
           <form
             onSubmit={submitSearch}
-            className="ml-auto hidden items-center border border-border lg:flex"
+            className="ml-auto hidden items-center overflow-hidden rounded-[15px] border border-border lg:flex"
           >
             <input
               value={term}
@@ -184,12 +184,12 @@ export function Header() {
           <div className="absolute inset-0 bg-black/50" onClick={() => setMobileOpen(false)} />
           <div className="absolute left-0 top-0 h-full w-[280px] bg-card p-4">
             <div className="mb-4 flex items-center justify-between">
-              <img src={site.logo} alt={site.name} className="h-8 w-auto" />
+              <img src={site.logoDark} alt={site.name} className="h-9 w-auto object-contain" />
               <button type="button" aria-label="Fechar menu" onClick={() => setMobileOpen(false)}>
                 <X className="size-4" />
               </button>
             </div>
-            <form onSubmit={submitSearch} className="mb-4 flex items-center border border-border">
+            <form onSubmit={submitSearch} className="mb-4 flex items-center overflow-hidden rounded-[15px] border border-border">
               <input
                 value={term}
                 onChange={(e) => setTerm(e.target.value)}
