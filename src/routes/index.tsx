@@ -337,7 +337,7 @@ function BlogSection() {
                 <img
                   src={p.image_url}
                   alt={p.title}
-                  className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="aspect-square w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
               </Link>
               <h3 className="mt-3 text-[13px] font-semibold uppercase tracking-wide text-ink">
