@@ -10,33 +10,102 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ContatoRouteImport } from './routes/contato'
+import { Route as PagamentoEFreteRouteImport } from './routes/pagamento-e-frete'
+import { Route as PoliticaDePrivacidadeRouteImport } from './routes/politica-de-privacidade'
+import { Route as QuemSomosRouteImport } from './routes/quem-somos'
+import { Route as TrocasEDevolucoesRouteImport } from './routes/trocas-e-devolucoes'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ContatoRoute = ContatoRouteImport.update({
+  id: '/contato',
+  path: '/contato',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PagamentoEFreteRoute = PagamentoEFreteRouteImport.update({
+  id: '/pagamento-e-frete',
+  path: '/pagamento-e-frete',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PoliticaDePrivacidadeRoute = PoliticaDePrivacidadeRouteImport.update({
+  id: '/politica-de-privacidade',
+  path: '/politica-de-privacidade',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const QuemSomosRoute = QuemSomosRouteImport.update({
+  id: '/quem-somos',
+  path: '/quem-somos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TrocasEDevolucoesRoute = TrocasEDevolucoesRouteImport.update({
+  id: '/trocas-e-devolucoes',
+  path: '/trocas-e-devolucoes',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/contato': typeof ContatoRoute
+  '/pagamento-e-frete': typeof PagamentoEFreteRoute
+  '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
+  '/quem-somos': typeof QuemSomosRoute
+  '/trocas-e-devolucoes': typeof TrocasEDevolucoesRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/contato': typeof ContatoRoute
+  '/pagamento-e-frete': typeof PagamentoEFreteRoute
+  '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
+  '/quem-somos': typeof QuemSomosRoute
+  '/trocas-e-devolucoes': typeof TrocasEDevolucoesRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/contato': typeof ContatoRoute
+  '/pagamento-e-frete': typeof PagamentoEFreteRoute
+  '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
+  '/quem-somos': typeof QuemSomosRoute
+  '/trocas-e-devolucoes': typeof TrocasEDevolucoesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/contato'
+    | '/pagamento-e-frete'
+    | '/politica-de-privacidade'
+    | '/quem-somos'
+    | '/trocas-e-devolucoes'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/contato'
+    | '/pagamento-e-frete'
+    | '/politica-de-privacidade'
+    | '/quem-somos'
+    | '/trocas-e-devolucoes'
+  id:
+    | '__root__'
+    | '/'
+    | '/contato'
+    | '/pagamento-e-frete'
+    | '/politica-de-privacidade'
+    | '/quem-somos'
+    | '/trocas-e-devolucoes'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ContatoRoute: typeof ContatoRoute
+  PagamentoEFreteRoute: typeof PagamentoEFreteRoute
+  PoliticaDePrivacidadeRoute: typeof PoliticaDePrivacidadeRoute
+  QuemSomosRoute: typeof QuemSomosRoute
+  TrocasEDevolucoesRoute: typeof TrocasEDevolucoesRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +117,51 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/contato': {
+      id: '/contato'
+      path: '/contato'
+      fullPath: '/contato'
+      preLoaderRoute: typeof ContatoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pagamento-e-frete': {
+      id: '/pagamento-e-frete'
+      path: '/pagamento-e-frete'
+      fullPath: '/pagamento-e-frete'
+      preLoaderRoute: typeof PagamentoEFreteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/politica-de-privacidade': {
+      id: '/politica-de-privacidade'
+      path: '/politica-de-privacidade'
+      fullPath: '/politica-de-privacidade'
+      preLoaderRoute: typeof PoliticaDePrivacidadeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/quem-somos': {
+      id: '/quem-somos'
+      path: '/quem-somos'
+      fullPath: '/quem-somos'
+      preLoaderRoute: typeof QuemSomosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/trocas-e-devolucoes': {
+      id: '/trocas-e-devolucoes'
+      path: '/trocas-e-devolucoes'
+      fullPath: '/trocas-e-devolucoes'
+      preLoaderRoute: typeof TrocasEDevolucoesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ContatoRoute: ContatoRoute,
+  PagamentoEFreteRoute: PagamentoEFreteRoute,
+  PoliticaDePrivacidadeRoute: PoliticaDePrivacidadeRoute,
+  QuemSomosRoute: QuemSomosRoute,
+  TrocasEDevolucoesRoute: TrocasEDevolucoesRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
