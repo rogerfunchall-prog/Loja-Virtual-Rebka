@@ -119,7 +119,7 @@ export function Header() {
 
           <Link to="/" className="shrink-0">
             <img
-              src={site.logo}
+              src={site.logoDark}
               alt={site.name}
               className="h-[38px] w-auto object-contain"
             />
