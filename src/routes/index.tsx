@@ -1,5 +1,4 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { CreditCard, RefreshCw, ShieldCheck, Star, Truck } from "lucide-react";
 import {
@@ -10,6 +9,7 @@ import {
   productsQuery,
   testimonialsQuery,
 } from "@/lib/catalog";
+import heroBanner from "@/assets/hero-rebka.png.asset.json";
 import { ProductCarousel } from "@/components/site/ProductCarousel";
 import { SectionHeading } from "@/components/site/SectionHeading";
 import { aboutText, advantageTexts, advantages, promoRibbon } from "@/lib/site";
@@ -326,7 +326,7 @@ function Home() {
 
   return (
     <>
-      <HeroCarousel />
+      <HeroBanner />
       <AdvantagesStrip />
       <CategoryCircles />
 
