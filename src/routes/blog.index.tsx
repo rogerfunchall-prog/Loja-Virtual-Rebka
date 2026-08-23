@@ -23,7 +23,7 @@ function Page() {
         {posts.map((p) => (
           <article key={p.id}>
             <Link to="/blog/$slug" params={{ slug: p.slug }} className="block overflow-hidden">
-              <img src={p.image_url} alt={p.title} className="aspect-[4/3] w-full object-cover" />
+              <img src={p.image_url} alt={p.title} className="aspect-square w-full object-cover" />
             </Link>
             <h2 className="mt-3 text-[13px] font-semibold uppercase tracking-wide text-ink">
               <Link to="/blog/$slug" params={{ slug: p.slug }} className="hover:text-brand">{p.title}</Link>
