@@ -1,12 +1,3 @@
--- =====================================================================
--- REBKA | Loja Virtual - Setup completo do Supabase
--- Cole este arquivo inteiro no SQL Editor do Supabase e execute (Run).
--- Cria: enums, tabelas, GRANTs, RLS, policies, funcao/trigger de perfil
--- e todo o conteudo da loja (categorias, marcas, produtos, banners,
--- depoimentos e posts do blog).
--- Rodar novamente e seguro: as tabelas sao recriadas do zero.
--- =====================================================================
-
 DROP TRIGGER IF EXISTS on_auth_user_created ON auth.users;
 DROP TABLE IF EXISTS public.order_items CASCADE;
 DROP TABLE IF EXISTS public.orders CASCADE;
@@ -23,10 +14,8 @@ DROP FUNCTION IF EXISTS public.handle_new_user() CASCADE;
 DROP FUNCTION IF EXISTS public.has_role(uuid, public.app_role) CASCADE;
 DROP TYPE IF EXISTS public.app_role CASCADE;
 
--- enums
 CREATE TYPE public.app_role AS ENUM ('admin','user');
 
--- roles
 CREATE TABLE public.user_roles (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id uuid NOT NULL,
@@ -43,8 +32,9 @@ CREATE OR REPLACE FUNCTION public.has_role(_user_id uuid, _role public.app_role)
 RETURNS boolean LANGUAGE sql STABLE SECURITY DEFINER SET search_path = public AS $$
   SELECT EXISTS (SELECT 1 FROM public.user_roles WHERE user_id = _user_id AND role = _role)
 $$;
+REVOKE ALL ON FUNCTION public.has_role(uuid, public.app_role) FROM public, anon;
+GRANT EXECUTE ON FUNCTION public.has_role(uuid, public.app_role) TO authenticated, service_role;
 
--- profiles
 CREATE TABLE public.profiles (
   id uuid PRIMARY KEY,
   full_name text,
@@ -64,9 +54,9 @@ BEGIN
   RETURN NEW;
 END;
 $$;
+REVOKE ALL ON FUNCTION public.handle_new_user() FROM public, anon, authenticated;
 CREATE TRIGGER on_auth_user_created AFTER INSERT ON auth.users FOR EACH ROW EXECUTE FUNCTION public.handle_new_user();
 
--- categories
 CREATE TABLE public.categories (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
   slug text NOT NULL UNIQUE,
@@ -80,7 +70,6 @@ ALTER TABLE public.categories ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "categories public read" ON public.categories FOR SELECT USING (true);
 CREATE POLICY "categories admin write" ON public.categories FOR ALL TO authenticated USING (public.has_role(auth.uid(),'admin')) WITH CHECK (public.has_role(auth.uid(),'admin'));
 
--- brands
 CREATE TABLE public.brands (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
   name text NOT NULL,
@@ -93,7 +82,6 @@ ALTER TABLE public.brands ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "brands public read" ON public.brands FOR SELECT USING (true);
 CREATE POLICY "brands admin write" ON public.brands FOR ALL TO authenticated USING (public.has_role(auth.uid(),'admin')) WITH CHECK (public.has_role(auth.uid(),'admin'));
 
--- products
 CREATE TABLE public.products (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
   slug text NOT NULL UNIQUE,
@@ -118,7 +106,6 @@ ALTER TABLE public.products ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "products public read" ON public.products FOR SELECT USING (true);
 CREATE POLICY "products admin write" ON public.products FOR ALL TO authenticated USING (public.has_role(auth.uid(),'admin')) WITH CHECK (public.has_role(auth.uid(),'admin'));
 
--- banners
 CREATE TABLE public.banners (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
   kind text NOT NULL,
@@ -134,7 +121,6 @@ ALTER TABLE public.banners ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "banners public read" ON public.banners FOR SELECT USING (true);
 CREATE POLICY "banners admin write" ON public.banners FOR ALL TO authenticated USING (public.has_role(auth.uid(),'admin')) WITH CHECK (public.has_role(auth.uid(),'admin'));
 
--- testimonials
 CREATE TABLE public.testimonials (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
   name text NOT NULL,
@@ -149,7 +135,6 @@ ALTER TABLE public.testimonials ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "testimonials public read" ON public.testimonials FOR SELECT USING (true);
 CREATE POLICY "testimonials admin write" ON public.testimonials FOR ALL TO authenticated USING (public.has_role(auth.uid(),'admin')) WITH CHECK (public.has_role(auth.uid(),'admin'));
 
--- posts
 CREATE TABLE public.posts (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
   slug text NOT NULL UNIQUE,
@@ -165,7 +150,6 @@ ALTER TABLE public.posts ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "posts public read" ON public.posts FOR SELECT USING (true);
 CREATE POLICY "posts admin write" ON public.posts FOR ALL TO authenticated USING (public.has_role(auth.uid(),'admin')) WITH CHECK (public.has_role(auth.uid(),'admin'));
 
--- newsletter
 CREATE TABLE public.newsletter_subscribers (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
   name text,
@@ -179,7 +163,6 @@ ALTER TABLE public.newsletter_subscribers ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "newsletter anyone subscribe" ON public.newsletter_subscribers FOR INSERT WITH CHECK (true);
 CREATE POLICY "newsletter admin read" ON public.newsletter_subscribers FOR SELECT TO authenticated USING (public.has_role(auth.uid(),'admin'));
 
--- orders
 CREATE TABLE public.orders (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id uuid,
@@ -218,7 +201,6 @@ CREATE POLICY "order items own read" ON public.order_items FOR SELECT TO authent
 CREATE POLICY "order items own insert" ON public.order_items FOR INSERT TO authenticated
   WITH CHECK (EXISTS (SELECT 1 FROM public.orders o WHERE o.id = order_id AND o.user_id = auth.uid()));
 
--- ================= SEED =================
 INSERT INTO public.categories (slug, name, image_url, position) VALUES
 ('perfumes','Perfumes','https://dcdn-us.mitiendanube.com/stores/006/384/221/products/produto-14-4f336762c30dcfe4e517510461301419-1024-1024.webp',1),
 ('skin-care','Skin Care','https://dcdn-us.mitiendanube.com/stores/006/384/221/products/produto-35-60257ccc5fa82d325917510615112074-1024-1024.webp',2),
@@ -274,9 +256,9 @@ UPDATE public.products SET brand_id = (SELECT id FROM public.brands ORDER BY pos
 INSERT INTO public.banners (kind,title,image_url,mobile_image_url,link,position) VALUES
 ('hero','Rebka - Skin Care That Connects','/images/hero-rebka.png',NULL,'/produtos',1),
 ('promo','Creme de Pentear','https://dcdn-us.mitiendanube.com/stores/006/384/221/themes/flex/2-slide-1750457225499-2792291752-dd484324c82d8cb653872596e83e51ca1750457226-1920-1920.webp',NULL,'/produtos',1),
-('promo','Lapis Multiuso','https://dcdn-us.mitiendanube.com/stores/006/384/221/themes/flex/2-slide-1750457225499-8247958269-98588c58b2e67e78bb96d7a16991a9d51750457227-1920-1920.webp',NULL,'/produtos',2),
+('promo','Lápis Multiuso','https://dcdn-us.mitiendanube.com/stores/006/384/221/themes/flex/2-slide-1750457225499-8247958269-98588c58b2e67e78bb96d7a16991a9d51750457227-1920-1920.webp',NULL,'/produtos',2),
 ('promo','Revitalizante','https://dcdn-us.mitiendanube.com/stores/006/384/221/themes/flex/2-slide-1751068589304-3223196557-aaa6be7f09f9484bb52bcd90d8170feb1751068590-1920-1920.webp',NULL,'/categoria/cabelo',3),
-('perfumes','Serums e Cremes','/images/banner-seruns-cremes.png',NULL,'/categoria/skin-care',1),
+('perfumes','Sérums e Cremes','/images/banner-seruns-cremes.png',NULL,'/categoria/skin-care',1),
 ('about','Seja bem-vinda ao nosso Universo Rebka','/images/about-rebka-v2.png',NULL,'/quem-somos',1),
 ('advantage','Ritual Completo de Skin Care','/images/escolher-9.webp',NULL,NULL,1),
 ('advantage','Sérum e Tônico que Conectam','/images/escolher-10.webp',NULL,NULL,2),
@@ -290,6 +272,6 @@ INSERT INTO public.testimonials (name,avatar_url,content,rating,position) VALUES
 ('Tamyres A.','https://dcdn-us.mitiendanube.com/stores/006/384/221/themes/flex/2-img-2064538070-1704346350-e2f515efb2a7e53e2141e4559747c6e71704346350-480-0.webp','Tudo perfeito. Adoro comprar nesta loja, pois sempre encontro tudo que preciso por um preço super acessível e um atendimento muito carinhoso. Recomendo!',5,4);
 
 INSERT INTO public.posts (slug,title,excerpt,content,image_url) VALUES
-('creme-hidratante-revitalizante-a-base-de-toda-pele-saudavel','Creme Hidratante Revitalizante: A Base de Toda Pele Saudável','Hidratar não é um passo opcional: é o que mantém a barreira da pele forte, confortável e com aquele aspecto saudável. Veja como o Creme Hidratante Revitalizante Rebka entra na sua rotina.','O Creme Hidratante Revitalizante Rebka (30ml) foi desenvolvido para repor a água e os lipídios que a pele perde ao longo do dia. Sua textura é leve, de rápida absorção e não deixa sensação pesada ou oleosa, o que o torna ideal tanto para usar de manhã, antes da maquiagem, quanto à noite, como último passo do skincare. Ao fortalecer a barreira cutânea, ele reduz a sensação de repuxamento, ajuda a controlar a desidratação e deixa a pele mais macia e uniforme desde as primeiras semanas. Como usar: aplique uma quantidade equivalente a uma ervilha sobre o rosto limpo, espalhando com movimentos suaves de dentro para fora e finalizando no colo. Pela manhã, finalize com protetor solar; à noite, aplique depois do sérum para selar os ativos na pele.','/images/blog-creme-hidratante-v2.png'),
-('acido-hialuronico-e-niacinamida-a-dupla-que-transforma-a-pele','Ácido Hialurônico e Niacinamida: A Dupla que Transforma a Pele','Juntos, o ácido hialurônico e a niacinamida do Sérum Hidratante Rebka entregam viço, uniformidade e uma pele visivelmente mais preenchida.','O ácido hialurônico é um ímã de água: ele atrai e retém umidade nas camadas superficiais da pele, resultando em aspecto preenchido, viçoso e linhas finas menos evidentes. A niacinamida atua em outra frente, ajudando a uniformizar o tom, suavizar marcas, controlar a oleosidade e reforçar a barreira cutânea. É por isso que o Sérum Hidratante Rebka (30ml) combina os dois ativos em uma fórmula leve, de toque seco e fácil de encaixar em qualquer rotina. Em que ordem usar: depois da limpeza, aplique o sérum na pele ainda levemente úmida e, em seguida, o Creme Hidratante Revitalizante para selar a hidratação. Pela manhã, finalize sempre com protetor solar — é ele que garante que os resultados dos ativos se mantenham.','/images/blog-serum-bolhas-v2.png'),
-('serum-hidratante-rebka-como-usar-para-potencializar-os-resultados','Sérum Hidratante Rebka: Como Usar para Potencializar os Resultados','Poucas gotas, no momento certo, fazem toda a diferença. Aprenda o passo a passo para extrair o máximo do Sérum Hidratante Rebka.','Sérum é concentrado: mais produto não significa mais resultado. O ideal são de 3 a 4 gotas do Sérum Hidratante Rebka, distribuídas nas pontas dos dedos e pressionadas suavemente sobre o rosto e o colo — sem esfregar. O melhor momento é logo após a limpeza, com a pele ainda levemente úmida, porque a água ajuda o ácido hialurônico a se fixar e a hidratar em profundidade. De manhã, use o sérum, siga com o Creme Hidratante Revitalizante e finalize com protetor solar. À noite, repita sérum e hidratante para a pele acordar confortável e luminosa. Guarde o frasco ao abrigo do sol e mantenha o conta-gotas sempre fechado para preservar a estabilidade da fórmula. Com uso diário e constante, os resultados de viço e uniformidade aparecem em poucas semanas.','/images/blog-serum-splash-v2.png');
+('creme-hidratante-revitalizante-a-base-de-toda-pele-saudavel','Creme Hidratante Revitalizante: A Base de Toda Pele Saudável','Hidratar não é um passo opcional: é o que mantém a barreira da pele forte, confortável e com aquele aspecto saudável. Veja como o Creme Hidratante Revitalizante Rebka entra na sua rotina.','O Creme Hidratante Revitalizante Rebka (30ml) foi desenvolvido para repor a água e os lipídios que a pele perde ao longo do dia. Sua textura é leve, de rápida absorção e não deixa sensação pesada ou oleosa. Como usar: aplique uma quantidade equivalente a uma ervilha sobre o rosto limpo, espalhando com movimentos suaves de dentro para fora e finalizando no colo.','/images/blog-creme-hidratante-v2.png'),
+('acido-hialuronico-e-niacinamida-a-dupla-que-transforma-a-pele','Ácido Hialurônico e Niacinamida: A Dupla que Transforma a Pele','Juntos, o ácido hialurônico e a niacinamida do Sérum Hidratante Rebka entregam viço, uniformidade e uma pele visivelmente mais preenchida.','O ácido hialurônico atrai e retém umidade nas camadas superficiais da pele, resultando em aspecto preenchido e viçoso. A niacinamida ajuda a uniformizar o tom, suavizar marcas, controlar a oleosidade e reforçar a barreira cutânea. Depois da limpeza, aplique o sérum na pele ainda levemente úmida e, em seguida, o Creme Hidratante Revitalizante para selar a hidratação.','/images/blog-serum-bolhas-v2.png'),
+('serum-hidratante-rebka-como-usar-para-potencializar-os-resultados','Sérum Hidratante Rebka: Como Usar para Potencializar os Resultados','Poucas gotas, no momento certo, fazem toda a diferença. Aprenda o passo a passo para extrair o máximo do Sérum Hidratante Rebka.','O ideal são de 3 a 4 gotas do Sérum Hidratante Rebka, distribuídas nas pontas dos dedos e pressionadas suavemente sobre o rosto e o colo. O melhor momento é logo após a limpeza, com a pele ainda levemente úmida. De manhã, use o sérum, siga com o Creme Hidratante Revitalizante e finalize com protetor solar.','/images/blog-serum-splash-v2.png');
