@@ -15,12 +15,12 @@ export const site = {
   phone: "(11) 99673-9701",
   whatsapp: "5511996739701",
   email: "contato@rebka.com.br",
-  city: "São Paulo/SP",
+  city: "Limeira/SP",
   hours: "Seg. a sex. das 9h às 18h",
-  instagram: "https://instagram.com/nuvemshop",
-  instagramHandle: "@nuvemshop",
-  facebook: "https://facebook.com/nuvemshop",
-  youtube: "https://youtube.com/nuvemshop",
+  instagram: "https://instagram.com/rebkalojaoficial",
+  instagramHandle: "@rebkalojaoficial",
+  facebook: "https://facebook.com/rebkalojaoficial",
+  youtube: "https://youtube.com/@rebkalojaoficial",
 };
 
 export const announcements = [
@@ -45,14 +45,14 @@ export const advantages = [
 ] as const;
 
 export const advantageTexts: Record<string, string> = {
-  "Fórmulas Limpas e Sustentáveis":
-    "Beleza consciente com fórmulas veganas, livres de parabenos e crueldade. Ingredientes naturais que cuidam de você e do planeta em cada aplicação.",
-  "Experiência Sensorial Superior":
-    "Texturas aveludadas, fragrâncias marcantes e um toque de cuidado. Cada produto transforma sua rotina em um momento de bem-estar e prazer.",
-  "Personalização para Cada Tipo de Pele ou Cabelo":
-    "Produtos desenvolvidos para valorizar sua individualidade, com soluções pensadas para todos os tons de pele, tipos de cabelo e necessidades reais.",
-  "Atendimento Consultivo e Exclusivo":
-    "Conte com um time que entende sua beleza. Consultoria especializada e orientação personalizada para escolher o produto ideal para você.",
+  "Ritual Completo de Skin Care":
+    "Do gel de limpeza ao creme hidratante, a linha Rebka foi pensada para funcionar em conjunto e transformar sua rotina em um ritual simples e eficaz.",
+  "Sérum e Tônico que Conectam":
+    "Sérum Hidratante com Ácido Hialurônico e Niacinamida somado ao Tônico Facial: equilíbrio, viço e preparo da pele em dois passos.",
+  "Resultados Visíveis na Pele":
+    "Textura leve, absorção rápida e efeito perceptível já nas primeiras semanas de uso. Cuidado real, feito para o dia a dia da sua pele.",
+  "Hidratação Profunda e Glow Natural":
+    "Fórmulas veganas e livres de crueldade que devolvem hidratação e luminosidade, para uma pele saudável e um brilho natural que é só seu.",
 };
 
 export const aboutText =
