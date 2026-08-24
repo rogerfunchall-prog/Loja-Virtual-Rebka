@@ -1,6 +1,3 @@
-export const CDN =
-  "https://dcdn-us.mitiendanube.com/stores/006/384/221";
-
 export const site = {
   name: "Rebka",
   tagline: "Skin Care That Connects",
