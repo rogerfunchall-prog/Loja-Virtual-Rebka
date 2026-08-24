@@ -137,11 +137,13 @@ function AdvantageCards() {
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {cards.map((c) => (
             <article key={c.id} className="bg-card">
-              <img
-                src={c.image_url}
-                alt={c.title ?? ""}
-                className="aspect-[4/3] w-full object-cover"
-              />
+              <div className="aspect-square w-full bg-surface">
+                <img
+                  src={c.image_url}
+                  alt={c.title ?? ""}
+                  className="size-full object-contain"
+                />
+              </div>
               <div className="p-4 text-center">
                 <h3 className="mb-2 text-[13px] font-semibold uppercase tracking-wide text-ink">
                   {c.title}
