@@ -209,7 +209,7 @@ function AboutSection() {
       <div className="flex-container grid items-center gap-10 lg:grid-cols-2">
         <div>
           <h2 className="mb-4 font-heading text-[24px] leading-[1.3] uppercase tracking-[0.1em] text-ink">
-            {about?.title ?? "Seja bem-vinda ao universo Rebka"}
+            {about?.title ?? "Seja bem-vinda ao nosso Universo Rebka"}
           </h2>
           <p className="mb-6 text-[13px] leading-[1.9] text-ink-soft">{aboutText}</p>
           <Link
