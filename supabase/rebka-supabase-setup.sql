@@ -15,6 +15,9 @@ DROP FUNCTION IF EXISTS public.has_role(uuid, public.app_role) CASCADE;
 DROP TYPE IF EXISTS public.app_role CASCADE;
 
 CREATE TYPE public.app_role AS ENUM ('admin','user');
+CREATE SCHEMA IF NOT EXISTS private;
+REVOKE ALL ON SCHEMA private FROM PUBLIC, anon;
+GRANT USAGE ON SCHEMA private TO authenticated, service_role;
 
 CREATE TABLE public.user_roles (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -28,12 +31,12 @@ GRANT ALL ON public.user_roles TO service_role;
 ALTER TABLE public.user_roles ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "users read own roles" ON public.user_roles FOR SELECT TO authenticated USING (user_id = auth.uid());
 
-CREATE OR REPLACE FUNCTION public.has_role(_user_id uuid, _role public.app_role)
+CREATE OR REPLACE FUNCTION private.has_role(_user_id uuid, _role public.app_role)
 RETURNS boolean LANGUAGE sql STABLE SECURITY DEFINER SET search_path = public AS $$
   SELECT EXISTS (SELECT 1 FROM public.user_roles WHERE user_id = _user_id AND role = _role)
 $$;
-REVOKE ALL ON FUNCTION public.has_role(uuid, public.app_role) FROM public, anon;
-GRANT EXECUTE ON FUNCTION public.has_role(uuid, public.app_role) TO authenticated, service_role;
+REVOKE ALL ON FUNCTION private.has_role(uuid, public.app_role) FROM PUBLIC, anon;
+GRANT EXECUTE ON FUNCTION private.has_role(uuid, public.app_role) TO authenticated, service_role;
 
 CREATE TABLE public.profiles (
   id uuid PRIMARY KEY,
@@ -68,7 +71,7 @@ GRANT SELECT ON public.categories TO anon, authenticated;
 GRANT ALL ON public.categories TO service_role;
 ALTER TABLE public.categories ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "categories public read" ON public.categories FOR SELECT USING (true);
-CREATE POLICY "categories admin write" ON public.categories FOR ALL TO authenticated USING (public.has_role(auth.uid(),'admin')) WITH CHECK (public.has_role(auth.uid(),'admin'));
+CREATE POLICY "categories admin write" ON public.categories FOR ALL TO authenticated USING (private.has_role(auth.uid(),'admin')) WITH CHECK (private.has_role(auth.uid(),'admin'));
 
 CREATE TABLE public.brands (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -80,7 +83,7 @@ GRANT SELECT ON public.brands TO anon, authenticated;
 GRANT ALL ON public.brands TO service_role;
 ALTER TABLE public.brands ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "brands public read" ON public.brands FOR SELECT USING (true);
-CREATE POLICY "brands admin write" ON public.brands FOR ALL TO authenticated USING (public.has_role(auth.uid(),'admin')) WITH CHECK (public.has_role(auth.uid(),'admin'));
+CREATE POLICY "brands admin write" ON public.brands FOR ALL TO authenticated USING (private.has_role(auth.uid(),'admin')) WITH CHECK (private.has_role(auth.uid(),'admin'));
 
 CREATE TABLE public.products (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -104,7 +107,7 @@ GRANT SELECT ON public.products TO anon, authenticated;
 GRANT ALL ON public.products TO service_role;
 ALTER TABLE public.products ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "products public read" ON public.products FOR SELECT USING (true);
-CREATE POLICY "products admin write" ON public.products FOR ALL TO authenticated USING (public.has_role(auth.uid(),'admin')) WITH CHECK (public.has_role(auth.uid(),'admin'));
+CREATE POLICY "products admin write" ON public.products FOR ALL TO authenticated USING (private.has_role(auth.uid(),'admin')) WITH CHECK (private.has_role(auth.uid(),'admin'));
 
 CREATE TABLE public.banners (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -119,7 +122,7 @@ GRANT SELECT ON public.banners TO anon, authenticated;
 GRANT ALL ON public.banners TO service_role;
 ALTER TABLE public.banners ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "banners public read" ON public.banners FOR SELECT USING (true);
-CREATE POLICY "banners admin write" ON public.banners FOR ALL TO authenticated USING (public.has_role(auth.uid(),'admin')) WITH CHECK (public.has_role(auth.uid(),'admin'));
+CREATE POLICY "banners admin write" ON public.banners FOR ALL TO authenticated USING (private.has_role(auth.uid(),'admin')) WITH CHECK (private.has_role(auth.uid(),'admin'));
 
 CREATE TABLE public.testimonials (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -133,7 +136,7 @@ GRANT SELECT ON public.testimonials TO anon, authenticated;
 GRANT ALL ON public.testimonials TO service_role;
 ALTER TABLE public.testimonials ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "testimonials public read" ON public.testimonials FOR SELECT USING (true);
-CREATE POLICY "testimonials admin write" ON public.testimonials FOR ALL TO authenticated USING (public.has_role(auth.uid(),'admin')) WITH CHECK (public.has_role(auth.uid(),'admin'));
+CREATE POLICY "testimonials admin write" ON public.testimonials FOR ALL TO authenticated USING (private.has_role(auth.uid(),'admin')) WITH CHECK (private.has_role(auth.uid(),'admin'));
 
 CREATE TABLE public.posts (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -148,7 +151,7 @@ GRANT SELECT ON public.posts TO anon, authenticated;
 GRANT ALL ON public.posts TO service_role;
 ALTER TABLE public.posts ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "posts public read" ON public.posts FOR SELECT USING (true);
-CREATE POLICY "posts admin write" ON public.posts FOR ALL TO authenticated USING (public.has_role(auth.uid(),'admin')) WITH CHECK (public.has_role(auth.uid(),'admin'));
+CREATE POLICY "posts admin write" ON public.posts FOR ALL TO authenticated USING (private.has_role(auth.uid(),'admin')) WITH CHECK (private.has_role(auth.uid(),'admin'));
 
 CREATE TABLE public.newsletter_subscribers (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -161,7 +164,7 @@ GRANT SELECT ON public.newsletter_subscribers TO authenticated;
 GRANT ALL ON public.newsletter_subscribers TO service_role;
 ALTER TABLE public.newsletter_subscribers ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "newsletter anyone subscribe" ON public.newsletter_subscribers FOR INSERT WITH CHECK (true);
-CREATE POLICY "newsletter admin read" ON public.newsletter_subscribers FOR SELECT TO authenticated USING (public.has_role(auth.uid(),'admin'));
+CREATE POLICY "newsletter admin read" ON public.newsletter_subscribers FOR SELECT TO authenticated USING (private.has_role(auth.uid(),'admin'));
 
 CREATE TABLE public.orders (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -181,7 +184,7 @@ CREATE TABLE public.orders (
 GRANT SELECT, INSERT ON public.orders TO authenticated;
 GRANT ALL ON public.orders TO service_role;
 ALTER TABLE public.orders ENABLE ROW LEVEL SECURITY;
-CREATE POLICY "orders own read" ON public.orders FOR SELECT TO authenticated USING (user_id = auth.uid() OR public.has_role(auth.uid(),'admin'));
+CREATE POLICY "orders own read" ON public.orders FOR SELECT TO authenticated USING (user_id = auth.uid() OR private.has_role(auth.uid(),'admin'));
 CREATE POLICY "orders own insert" ON public.orders FOR INSERT TO authenticated WITH CHECK (user_id = auth.uid());
 
 CREATE TABLE public.order_items (
@@ -197,7 +200,7 @@ GRANT SELECT, INSERT ON public.order_items TO authenticated;
 GRANT ALL ON public.order_items TO service_role;
 ALTER TABLE public.order_items ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "order items own read" ON public.order_items FOR SELECT TO authenticated
-  USING (EXISTS (SELECT 1 FROM public.orders o WHERE o.id = order_id AND (o.user_id = auth.uid() OR public.has_role(auth.uid(),'admin'))));
+  USING (EXISTS (SELECT 1 FROM public.orders o WHERE o.id = order_id AND (o.user_id = auth.uid() OR private.has_role(auth.uid(),'admin'))));
 CREATE POLICY "order items own insert" ON public.order_items FOR INSERT TO authenticated
   WITH CHECK (EXISTS (SELECT 1 FROM public.orders o WHERE o.id = order_id AND o.user_id = auth.uid()));
 
