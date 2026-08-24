@@ -15,12 +15,12 @@ export const site = {
   phone: "(11) 99673-9701",
   whatsapp: "5511996739701",
   email: "contato@rebka.com.br",
-  city: "São Paulo/SP",
+  city: "Limeira/SP",
   hours: "Seg. a sex. das 9h às 18h",
-  instagram: "https://instagram.com/nuvemshop",
-  instagramHandle: "@nuvemshop",
-  facebook: "https://facebook.com/nuvemshop",
-  youtube: "https://youtube.com/nuvemshop",
+  instagram: "https://instagram.com/rebkalojaoficial",
+  instagramHandle: "@rebkalojaoficial",
+  facebook: "https://facebook.com/rebkalojaoficial",
+  youtube: "https://youtube.com/@rebkalojaoficial",
 };
 
 export const announcements = [
