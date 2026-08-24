@@ -9,7 +9,6 @@ import {
   productsQuery,
   testimonialsQuery,
 } from "@/lib/catalog";
-import heroBanner from "@/assets/hero-rebka.png.asset.json";
 import { ProductCarousel } from "@/components/site/ProductCarousel";
 import { SectionHeading } from "@/components/site/SectionHeading";
 import { aboutText, advantageTexts, advantages, promoRibbon } from "@/lib/site";
@@ -42,7 +41,7 @@ function HeroBanner() {
     <section className="overflow-hidden">
       <Link to="/produtos" className="block">
         <img
-          src={heroBanner.url}
+          src="/images/hero-rebka.png"
           alt="Rebka — Skin Care That Connects"
           className="w-full object-cover"
         />

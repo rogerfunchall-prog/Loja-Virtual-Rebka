@@ -1,17 +1,13 @@
-import logoDarkAsset from "@/assets/logo-dark.png.asset.json";
-import logoLightAsset from "@/assets/logo-light.png.asset.json";
-import logoPinkAsset from "@/assets/logo-pink.png.asset.json";
-
 export const CDN =
   "https://dcdn-us.mitiendanube.com/stores/006/384/221";
 
 export const site = {
   name: "Rebka",
   tagline: "Skin Care That Connects",
-  logo: logoDarkAsset.url,
-  logoDark: logoDarkAsset.url,
-  logoLight: logoLightAsset.url,
-  logoPink: logoPinkAsset.url,
+  logo: "/images/logo-dark.png",
+  logoDark: "/images/logo-dark.png",
+  logoLight: "/images/logo-light.png",
+  logoPink: "/images/logo-pink.png",
   phone: "(11) 99673-9701",
   whatsapp: "5511996739701",
   email: "contato@rebka.com.br",
